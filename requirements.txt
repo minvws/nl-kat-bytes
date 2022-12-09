@@ -2,7 +2,7 @@ alembic==1.7.7
 anyio==3.6.1
 asgiref==3.5.2
 bcrypt==3.2.2
-certifi==2022.5.18.1
+certifi==2022.12.7
 cffi==1.15.0
 charset-normalizer==2.0.12
 click==8.1.3
