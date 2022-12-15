@@ -44,13 +44,9 @@ export m
 
 migrations: ## Generate a migration using alembic
 ifdef m
-ifdef revid
-	$(py-run) -m alembic --config /app/bytes/bytes/alembic.ini revision --autogenerate -m "$(m)" --rev-id="$(revid)"
+	$(py-run) -m alembic --config /app/bytes/bytes/alembic.ini revision --autogenerate -m "$(m)"
 else
-	$(HIDE) (echo "Specify a message with m={message} and a rev-id with revid={revid} (e.g. 0001 etc.)"; exit 1)
-endif
-else
-	$(HIDE) (echo "Specify a message with m={message} and a rev-id with revid={revid} (e.g. 0001 etc.)"; exit 1)
+	$(HIDE) (echo "Specify a message with m={message}"; exit 1)
 endif
 
 
@@ -88,7 +84,7 @@ debian:
 	docker run --rm \
 	--env PKG_NAME=kat-bytes \
 	--env BUILD_DIR=./build \
-	--env REPOSITORY=minvws/nl-kat-bytes \
+	--env REPOSITORY=minvws/nl-rt-tim-abang-bytes \
 	--env RELEASE_VERSION=${RELEASE_VERSION} \
 	--env RELEASE_TAG=${RELEASE_TAG} \
 	--mount type=bind,src=${CURDIR},dst=/app \
@@ -101,7 +97,7 @@ ubuntu:
 	docker run --rm \
 	--env PKG_NAME=kat-bytes \
 	--env BUILD_DIR=./build \
-	--env REPOSITORY=minvws/nl-kat-bytes \
+	--env REPOSITORY=minvws/nl-rt-tim-abang-bytes \
 	--env RELEASE_VERSION=${RELEASE_VERSION} \
 	--env RELEASE_TAG=${RELEASE_TAG} \
 	--mount type=bind,src=${CURDIR},dst=/app \
