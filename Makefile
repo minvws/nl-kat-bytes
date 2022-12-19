@@ -84,7 +84,7 @@ debian:
 	docker run --rm \
 	--env PKG_NAME=kat-bytes \
 	--env BUILD_DIR=./build \
-	--env REPOSITORY=minvws/nl-rt-tim-abang-bytes \
+	--env REPOSITORY=minvws/nl-kat-bytes \
 	--env RELEASE_VERSION=${RELEASE_VERSION} \
 	--env RELEASE_TAG=${RELEASE_TAG} \
 	--mount type=bind,src=${CURDIR},dst=/app \
@@ -97,7 +97,7 @@ ubuntu:
 	docker run --rm \
 	--env PKG_NAME=kat-bytes \
 	--env BUILD_DIR=./build \
-	--env REPOSITORY=minvws/nl-rt-tim-abang-bytes \
+	--env REPOSITORY=minvws/nl-kat-bytes \
 	--env RELEASE_VERSION=${RELEASE_VERSION} \
 	--env RELEASE_TAG=${RELEASE_TAG} \
 	--mount type=bind,src=${CURDIR},dst=/app \
