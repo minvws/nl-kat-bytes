@@ -53,6 +53,8 @@ endif
 sql: ## Generate raw sql for the migrations
 	$(py-run) -m alembic --config /app/bytes/bytes/alembic.ini upgrade $(rev1):$(rev2) --sql
 
+migrate: ## Run alembic migrations
+	$(py-run) -m alembic --config /app/bytes/bytes/alembic.ini upgrade head
 
 ##
 ##|------------------------------------------------------------------------|
