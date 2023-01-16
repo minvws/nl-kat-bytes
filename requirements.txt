@@ -10,7 +10,7 @@ cryptography==38.0.4
 ecdsa==0.18.0b2
 fastapi==0.88.0
 greenlet==2.0.1
-h11==0.13.0
+h11==0.14.0
 idna==3.4
 importlib-metadata==5.1.0
 importlib-resources==5.7.1
