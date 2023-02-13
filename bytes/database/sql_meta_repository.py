@@ -45,7 +45,7 @@ class SQLMetaDataRepository(MetaDataRepository):
         try:
             self.session.commit()
         except IntegrityError as e:
-            raise ObjectAlreadyExists(str(e)) from e
+            raise MetaIntegrityError(str(e)) from e
 
     def save_boefje_meta(self, boefje_meta: BoefjeMeta) -> None:
         logger.info("Inserting meta: %s", boefje_meta.json())
@@ -200,7 +200,7 @@ class ObjectNotFoundException(Exception):
         super().__init__(f"The object of type {cls} was not found for query parameters {kwargs}")
 
 
-class ObjectAlreadyExists(Exception):
+class MetaIntegrityError(Exception):
     def __init__(self, message: str):
         super().__init__(message)
 

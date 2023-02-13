@@ -11,7 +11,7 @@ from bytes.events.events import RawFileReceived, NormalizerMetaReceived
 from bytes.events.manager import EventManager
 from bytes.models import BoefjeMeta, MimeType, NormalizerMeta, RawData, RawDataMeta
 from bytes.rabbitmq import create_event_manager
-from bytes.database.sql_meta_repository import create_meta_data_repository, ObjectNotFoundException, ObjectAlreadyExists
+from bytes.database.sql_meta_repository import create_meta_data_repository, ObjectNotFoundException, MetaIntegrityError
 from bytes.repositories.meta_repository import MetaDataRepository, BoefjeMetaFilter, RawDataFilter
 
 logger = logging.getLogger(__name__)
@@ -29,8 +29,10 @@ def create_boefje_meta(
     try:
         with meta_repository:
             meta_repository.save_boefje_meta(boefje_meta)
-    except ObjectAlreadyExists:
-        return JSONResponse({"status": "failed", "message": "Object already exists"}, status_code=400)
+    except MetaIntegrityError:
+        return JSONResponse(
+            {"status": "failed", "message": "Integrity error: object might already exist"}, status_code=400
+        )
 
     return JSONResponse({"status": "success"}, status_code=201)
 
@@ -79,8 +81,10 @@ def create_normalizer_meta(
     try:
         with meta_repository:
             meta_repository.save_normalizer_meta(normalizer_meta)
-    except ObjectAlreadyExists:
-        return JSONResponse({"status": "failed", "message": "Object already exists"}, status_code=400)
+    except MetaIntegrityError:
+        return JSONResponse(
+            {"status": "failed", "message": "Integrity error: object might already exist"}, status_code=400
+        )
 
     event = NormalizerMetaReceived(
         organization=normalizer_meta.boefje_meta.organization,
